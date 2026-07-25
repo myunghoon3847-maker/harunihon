@@ -1,12 +1,95 @@
-<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#356de8"><meta name="description" content="히라가나, 가타카나, 기초단어 1000개, 생활회화 100문장과 기초문법을 학습하는 일본어 앱"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="하루니혼 Lite"><link rel="manifest" href="manifest.webmanifest"><link rel="icon" href="icons/icon-192.png"><link rel="apple-touch-icon" href="icons/icon-192.png"><link rel="stylesheet" href="styles.css"><title>하루니혼 Lite</title></head><body><div class="app"><header><div class="brand"><div><h1>하루니혼 Lite</h1><p>매일 조금씩, 일본어가 익숙해지는 앱 · v1.1.0</p></div><button id="themeBtn" class="icon-button" aria-label="다크 모드">🌙</button></div></header><div id="installBanner" class="install"><div><b>앱으로 설치하기</b><small>홈 화면에서 오프라인으로 사용할 수 있어요.</small></div><button id="installBtn">설치</button></div><main>
-<section id="home" class="view active"><div class="stats"><div class="card stat"><span>전체 단어</span><b>1000</b></div><div class="card stat"><span>암기 완료</span><b id="memCount">0</b></div><div class="card stat"><span>오답</span><b id="wrongCount">0</b></div><div class="card stat"><span>오늘 학습</span><b id="todayCount">0</b></div></div><div class="card progress"><div class="progress-head"><b>오늘의 학습률</b><span id="progressText">0%</span></div><div class="bar"><span id="progressBar"></span></div></div><h2 class="section-title">빠른 학습</h2><div class="quick"><button class="primary" data-go="card"><div class="emoji">🃏</div><h3>플래시카드</h3><p>단어를 넘기며 암기</p></button><button data-go="quiz"><div class="emoji">🧩</div><h3>퀴즈</h3><p>4지선다로 복습</p></button><button data-go="kana"><div class="emoji">あ</div><h3>문자표</h3><p>히라가나·가타카나</p></button><button data-go="talk"><div class="emoji">💬</div><h3>기초회화</h3><p>생활회화 100문장</p></button><button data-go="grammar"><div class="emoji">✍️</div><h3>기초문법</h3><p>N5 핵심 31과</p></button></div><h2 class="section-title">오늘의 회화</h2><div id="dailyTalk" class="card"></div></section>
-<section id="kana" class="view"><h2 class="section-title">문자 학습</h2><div class="tabs"><button class="pill active" data-kana="hiragana">히라가나</button><button class="pill" data-kana="katakana">가타카나</button></div><div id="kanaGrid" class="kana-grid"></div></section>
-<section id="words" class="view"><h2 class="section-title">기초단어 1000</h2><div class="toolbar"><input id="wordSearch" class="search" placeholder="일본어·읽기·한국어 발음·뜻 검색"><select id="wordStatus" class="select"><option value="all">전체</option><option value="fav">즐겨찾기</option><option value="mem">암기완료</option><option value="new">미암기</option></select></div><div id="wordCount" class="count"></div><div id="wordList"></div></section>
-<section id="talk" class="view"><h2 class="section-title">기초회화 100문장</h2><div class="toolbar"><input id="talkSearch" class="search" placeholder="일본어·읽기·한국어 발음·뜻 검색"><select id="talkCategory" class="select"><option value="all">전체 카테고리</option></select></div><div id="talkCount" class="count"></div><div id="talkList"></div></section>
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#4f46a5">
+  <meta name="description" content="한국어 발음과 함께 배우는 초보자용 일본어 학습 앱">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="하루니혼">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/icon-192.png">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="stylesheet" href="styles.css">
+  <title>하루니혼 · 매일 10분 일본어</title>
+</head>
+<body>
+<div class="app">
+  <header class="app-header">
+    <div class="brand">
+      <div class="brand-mark" aria-hidden="true">日</div>
+      <div class="brand-copy">
+        <span class="eyebrow">매일 10분 일본어</span>
+        <h1>하루니혼</h1>
+      </div>
+      <button id="themeBtn" class="icon-button" aria-label="다크 모드">🌙</button>
+    </div>
+  </header>
 
-<section id="grammar" class="view"><h2 class="section-title">기초문법 N5</h2><div class="toolbar"><input id="grammarSearch" class="search" placeholder="문형·제목·설명 검색"><select id="grammarUnit" class="select"><option value="all">전체 단원</option></select></div><div class="card grammar-progress"><div class="progress-head"><b>문법 학습 진도</b><span id="grammarProgressText">0 / 31</span></div><div class="bar"><span id="grammarProgressBar"></span></div></div><div id="grammarCount" class="count"></div><div id="grammarList"></div></section>
-<section id="card" class="view"><h2 class="section-title">플래시카드</h2><div class="tabs"><button class="pill active" data-card-mode="word">단어</button><button class="pill" data-card-mode="talk">회화</button></div><div id="flash" class="card flash"><small id="flashIndex"></small><div id="flashMain" class="big"></div><div id="flashAnswer" class="answer"><div id="flashReading" class="reading"></div><div id="flashKo" class="ko"></div></div></div><div class="study-controls"><button id="speakCard">🔊 발음</button><button id="autoSpeak">자동재생 꺼짐</button><button id="revealCard">뜻 보기</button><button id="nextCard">다음</button><button id="againCard">다시 보기</button><button id="memorizeCard" class="primary">암기 완료</button></div></section>
-<section id="quiz" class="view"><h2 class="section-title">랜덤 퀴즈</h2><div class="tabs"><button class="pill active" data-quiz-mode="word">단어</button><button class="pill" data-quiz-mode="talk">회화</button></div><div class="card"><div id="quizStatus" class="count">정답을 골라보세요</div><div id="quizQ" class="quiz-q"></div><div id="quizOptions"></div></div><button id="nextQuiz" class="full-button">다음 문제</button></section>
-<section id="wrong" class="view"><h2 class="section-title">오답노트</h2><div class="tabs"><button class="pill active" data-wrong-mode="word">단어</button><button class="pill" data-wrong-mode="talk">회화</button></div><div id="wrongList"></div></section>
-<section id="settings" class="view"><h2 class="section-title">설정</h2><div class="card"><button id="fontBtn" class="full-button">글자 크게 보기: 꺼짐</button><button id="resetBtn" class="full-button" style="margin-top:10px">학습 기록 초기화</button><p class="count">학습 기록은 이 기기의 브라우저에 저장됩니다.</p></div></section>
-</main><nav><button class="active" data-nav="home"><span>🏠</span>홈</button><button data-nav="words"><span>📚</span>단어</button><button data-nav="talk"><span>💬</span>회화</button><button data-nav="grammar"><span>✍️</span>문법</button><button data-nav="kana"><span>あ</span>문자</button><button data-nav="card"><span>🃏</span>카드</button><button data-nav="quiz"><span>🧩</span>퀴즈</button><button data-nav="settings"><span>⚙️</span>설정</button></nav></div><script src="data.js"></script><script src="grammar.js"></script><script src="app.js"></script></body></html>
+  <div id="installBanner" class="install">
+    <div><b>하루니혼을 앱처럼 사용해 보세요</b><small>홈 화면에 설치하면 더 빠르게 시작할 수 있어요.</small></div>
+    <button id="installBtn">설치</button>
+  </div>
+
+  <main>
+    <section id="home" class="view active">
+      <div class="hero-card">
+        <div>
+          <span class="hero-label">今日の学習 · 오늘의 학습</span>
+          <h2>가볍게 시작해도<br>매일이면 실력이 됩니다.</h2>
+          <p>문자 · 단어 · 회화 · 문법을 한 번에 익혀보세요.</p>
+          <button class="hero-cta" data-go="card">오늘 학습 시작 <span>→</span></button>
+        </div>
+        <div class="hero-visual" aria-hidden="true">
+          <span class="sun">☀</span><b>あ</b><small>日本語</small>
+        </div>
+      </div>
+
+      <div class="today-panel">
+        <div class="progress-copy"><span>오늘의 목표</span><b id="progressText">0%</b></div>
+        <div class="bar"><span id="progressBar"></span></div>
+        <div class="stats">
+          <div class="stat"><span>오늘 학습</span><b id="todayCount">0</b><small>개</small></div>
+          <div class="stat"><span>암기 완료</span><b id="memCount">0</b><small>개</small></div>
+          <div class="stat"><span>복습 필요</span><b id="wrongCount">0</b><small>개</small></div>
+          <div class="stat"><span>전체 단어</span><b>1000</b><small>개</small></div>
+        </div>
+      </div>
+
+      <div class="section-heading"><div><span>LEARNING PATH</span><h2>무엇을 공부할까요?</h2></div><small>원하는 학습을 선택하세요</small></div>
+      <div class="quick">
+        <button class="quick-main" data-go="card"><span class="quick-icon">▣</span><div><em>추천 학습</em><h3>플래시카드</h3><p>단어를 빠르게 넘기며 암기해요</p></div><b>→</b></button>
+        <button data-go="words"><span class="quick-icon indigo">字</span><div><h3>기초단어</h3><p>필수 단어 1000개</p></div></button>
+        <button data-go="talk"><span class="quick-icon coral">話</span><div><h3>생활회화</h3><p>바로 쓰는 100문장</p></div></button>
+        <button data-go="grammar"><span class="quick-icon mint">文</span><div><h3>기초문법</h3><p>JLPT N5 핵심 31과</p></div></button>
+        <button data-go="kana"><span class="quick-icon gold">あ</span><div><h3>문자 학습</h3><p>히라가나·가타카나</p></div></button>
+        <button data-go="quiz"><span class="quick-icon blue">✓</span><div><h3>랜덤 퀴즈</h3><p>배운 내용을 바로 확인</p></div></button>
+      </div>
+
+      <div class="section-heading"><div><span>DAILY PHRASE</span><h2>오늘의 한마디</h2></div></div>
+      <div id="dailyTalk" class="card daily-card"></div>
+    </section>
+
+    <section id="kana" class="view"><div class="page-head"><span>KANA</span><h2>일본어 문자</h2><p>소리와 함께 천천히 익혀보세요.</p></div><div class="tabs"><button class="pill active" data-kana="hiragana">히라가나</button><button class="pill" data-kana="katakana">가타카나</button></div><div id="kanaGrid" class="kana-grid"></div></section>
+    <section id="words" class="view"><div class="page-head"><span>VOCABULARY</span><h2>기초단어 1000</h2><p>일본어·읽기·한국어 발음을 함께 확인하세요.</p></div><div class="toolbar"><input id="wordSearch" class="search" placeholder="단어 또는 뜻 검색"><select id="wordStatus" class="select"><option value="all">전체</option><option value="fav">즐겨찾기</option><option value="mem">암기완료</option><option value="new">미암기</option></select></div><div id="wordCount" class="count"></div><div id="wordList"></div></section>
+    <section id="talk" class="view"><div class="page-head"><span>CONVERSATION</span><h2>생활회화 100</h2><p>일본에서 실제로 자주 쓰는 표현부터 배워요.</p></div><div class="toolbar"><input id="talkSearch" class="search" placeholder="회화 또는 뜻 검색"><select id="talkCategory" class="select"><option value="all">전체 카테고리</option></select></div><div id="talkCount" class="count"></div><div id="talkList"></div></section>
+    <section id="grammar" class="view"><div class="page-head"><span>GRAMMAR</span><h2>기초문법 N5</h2><p>문형 → 설명 → 예문 순서로 이해해요.</p></div><div class="toolbar"><input id="grammarSearch" class="search" placeholder="문형·제목·설명 검색"><select id="grammarUnit" class="select"><option value="all">전체 단원</option></select></div><div class="card grammar-progress"><div class="progress-head"><b>문법 학습 진도</b><span id="grammarProgressText">0 / 31</span></div><div class="bar"><span id="grammarProgressBar"></span></div></div><div id="grammarCount" class="count"></div><div id="grammarList"></div></section>
+    <section id="card" class="view"><div class="page-head"><span>FLASH CARD</span><h2>플래시카드</h2><p>먼저 떠올리고, 답을 확인하세요.</p></div><div class="tabs"><button class="pill active" data-card-mode="word">단어</button><button class="pill" data-card-mode="talk">회화</button></div><div id="flash" class="card flash"><small id="flashIndex"></small><div id="flashMain" class="big"></div><div id="flashAnswer" class="answer"><div id="flashReading" class="reading"></div><div id="flashKo" class="ko"></div></div></div><div class="study-controls"><button id="speakCard">🔊 발음 듣기</button><button id="autoSpeak">자동재생 꺼짐</button><button id="revealCard" class="primary">뜻 보기</button><button id="nextCard">다음 카드</button><button id="againCard">다시 보기</button><button id="memorizeCard" class="success">✓ 암기 완료</button></div></section>
+    <section id="quiz" class="view"><div class="page-head"><span>QUIZ</span><h2>랜덤 퀴즈</h2><p>정답을 고르고 바로 복습하세요.</p></div><div class="tabs"><button class="pill active" data-quiz-mode="word">단어</button><button class="pill" data-quiz-mode="talk">회화</button></div><div class="card quiz-card"><div id="quizStatus" class="count">정답을 골라보세요</div><div id="quizQ" class="quiz-q"></div><div id="quizOptions"></div></div><button id="nextQuiz" class="full-button primary">다음 문제</button></section>
+    <section id="wrong" class="view"><div class="page-head"><span>REVIEW</span><h2>오답노트</h2><p>틀린 표현만 모아서 다시 학습해요.</p></div><div class="tabs"><button class="pill active" data-wrong-mode="word">단어</button><button class="pill" data-wrong-mode="talk">회화</button></div><div id="wrongList"></div></section>
+    <section id="settings" class="view"><div class="page-head"><span>SETTINGS</span><h2>설정</h2><p>나에게 편한 학습 환경을 만들어요.</p></div><div class="card settings-card"><button id="fontBtn" class="setting-row"><span><b>큰 글자 모드</b><small>학습 카드의 글자를 더 크게 표시</small></span><em>꺼짐</em></button><button id="resetBtn" class="setting-row danger"><span><b>학습 기록 초기화</b><small>암기·오답·진도 기록을 모두 삭제</small></span><em>초기화</em></button><p class="storage-note">학습 기록은 현재 기기의 브라우저에 안전하게 저장됩니다.</p></div></section>
+  </main>
+
+  <nav aria-label="주요 메뉴">
+    <button class="active" data-nav="home"><span>⌂</span>홈</button>
+    <button data-nav="words"><span>字</span>단어</button>
+    <button data-nav="talk"><span>話</span>회화</button>
+    <button data-nav="grammar"><span>文</span>문법</button>
+    <button data-nav="kana"><span>あ</span>문자</button>
+    <button data-nav="card"><span>▣</span>카드</button>
+    <button data-nav="quiz"><span>✓</span>퀴즈</button>
+    <button data-nav="settings"><span>⚙</span>설정</button>
+  </nav>
+</div>
+<script src="data.js"></script><script src="grammar.js"></script><script src="app.js"></script>
+</body></html>
