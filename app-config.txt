@@ -1,0 +1,10 @@
+앱 이름: 하루니혼 Lite
+패키지명(제안): com.hoony.harunihon
+버전명: 1.0.0
+버전 코드: 1
+대상 SDK: 36
+앱 유형: Trusted Web Activity (TWA)
+시작 경로: /
+화면 방향: portrait
+테마 색상: #2563EB
+배경 색상: #F4F7FB
